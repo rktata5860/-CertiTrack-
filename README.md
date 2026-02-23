@@ -24,8 +24,8 @@ Production-ready React + Vite web app with Firebase Auth, Firestore, and Storage
 
 ## Features
 - Role-based protected nested routing + layouts and sidebars.
-- User dashboard stats, quick actions, and recent certificates.
-- Admin dashboard with org metrics and raw data snapshot.
+- User dashboard with KPI cards, alerts, upcoming renewals table, and raw information snapshot.
+- Admin command-center dashboard with org metrics, issuer insights, governance notes, and raw records table.
 - User certificate CRUD with search/filter + status + PDF/proof column.
 - Renewal grouping for user and admin views.
 - Chatbot helper widget on all pages.

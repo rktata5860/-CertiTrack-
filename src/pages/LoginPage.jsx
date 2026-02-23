@@ -31,48 +31,66 @@ export default function LoginPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-card glass-card">
+      <div className="auth-card glass-card polished-auth">
         <h1>CertiTrack</h1>
-        <p>Manage certifications, renewals, and proof documents professionally.</p>
+        <p className="auth-subtitle">Professional Certificate Tracking System</p>
+
         <div className="toggle-group">
-          <button className={mode === 'login' ? 'active' : ''} onClick={() => setMode('login')}>
+          <button type="button" className={mode === 'login' ? 'active' : ''} onClick={() => setMode('login')}>
             Login
           </button>
-          <button className={mode === 'signup' ? 'active' : ''} onClick={() => setMode('signup')}>
+          <button type="button" className={mode === 'signup' ? 'active' : ''} onClick={() => setMode('signup')}>
             Sign Up
           </button>
         </div>
 
+        <h2>{mode === 'signup' ? 'Create Account' : 'Sign In'}</h2>
+        <p className="auth-hint">Login to manage your certificates.</p>
+
         <form onSubmit={handleSubmit}>
           {mode === 'signup' && (
+            <label>
+              Full Name
+              <input
+                placeholder="John Doe"
+                value={form.name}
+                onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                required
+              />
+            </label>
+          )}
+          <label>
+            Gmail
             <input
-              placeholder="Full Name"
-              value={form.name}
-              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+              type="email"
+              placeholder="example@gmail.com"
+              value={form.email}
+              onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
               required
             />
-          )}
-          <input
-            type="email"
-            placeholder="Email"
-            value={form.email}
-            onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={form.password}
-            onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
-            required
-          />
+          </label>
+          <label>
+            Password
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={form.password}
+              onChange={(e) => setForm((f) => ({ ...f, password: e.target.value }))}
+              required
+            />
+          </label>
           {error && <p className="error-text">{error}</p>}
-          <button className="btn-primary" disabled={loading}>{loading ? 'Please wait...' : mode === 'signup' ? 'Create Account' : 'Login'}</button>
+          <button className="btn-primary" disabled={loading}>
+            {loading ? 'Please wait...' : mode === 'signup' ? 'Create Account' : 'Continue'}
+          </button>
         </form>
-        <button className="btn-secondary" onClick={() => loginGoogle()}>
+
+        <div className="or-divider">OR</div>
+
+        <button className="btn-google" onClick={() => loginGoogle()}>
           Continue with Google
         </button>
-        <small>Secure sign-in for both User and Admin roles.</small>
+        <small>⚠️ Note: For security, we do not store your Gmail password. Google login uses Firebase sign-in.</small>
       </div>
     </div>
   );
